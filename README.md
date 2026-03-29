@@ -4,10 +4,10 @@ Bu repo, yazılım mühendisliği becerilerini geliştirmek için oluşturulmuş
 
 ## Özellikler
 
-- **Modüler Kod**: [`spaghetti_logic.py`](mcp-student-sandbox/spaghetti_logic.py) – Veri işleme fonksiyonları.
-- **Hata Yönetimi**: [`failing_calculator.py`](mcp-student-sandbox/failing_calculator.py) – Ortalama hesaplama (sıfıra bölünme önleme).
-- **Güvenlik**: [`secret_leak.py`](mcp-student-sandbox/secret_leak.py) – Güvenli anahtar yönetimi (environment variables).
-- **Matematik**: [`mystery_module.py`](mcp-student-sandbox/mystery_module.py) – Kuadratik denklem kökleri hesaplama.
+- **Modüler Kod**: [`spaghetti_logic.py`](spaghetti_logic.py) – Veri işleme fonksiyonları (apply_multiplier, process_data).
+- **Hata Yönetimi**: [`failing_calculator.py`](failing_calculator.py) – Ortalama hesaplama (sıfıra bölünme önleme) fonksiyonu `average_ratios`.
+- **Güvenlik**: [`secret_leak.py`](secret_leak.py) – `AWS_SECRET_KEY` ortam değişkeni kontrolü ve bağlantı simülasyonu.
+- **Matematik**: [`mystery_module.py`](mystery_module.py) – Kuadratik denklem kökleri hesaplayan `fn_x`.
 
 ## Kurulum
 
@@ -19,33 +19,44 @@ Bu repo, yazılım mühendisliği becerilerini geliştirmek için oluşturulmuş
 
 2. Python 3.x gereklidir. Bağımlılıkları yükleyin (varsa):
    ```sh
-   pip install -r requirements.txt  # Eğer requirements.txt varsa
+   pip install -r requirements.txt
    ```
 
 ## Kullanım
 
-- **Veri İşleme**: [`process_data`](mcp-student-sandbox/spaghetti_logic.py) fonksiyonunu çalıştırın.
-- **Hesaplama**: [`average_ratios`](mcp-student-sandbox/failing_calculator.py) ile test edin.
-- **Güvenlik**: [`connect`](mcp-student-sandbox/secret_leak.py) için AWS_SECRET_KEY environment variable'ını ayarlayın.
-- **Matematik**: [`fn_x`](mcp-student-sandbox/mystery_module.py) ile kökleri hesaplayın (örneğin, `fn_x(1, -3, 2)` → (2.0, 1.0)).
+### 1. Veri işleme
 
-Örnek çalıştırma:
 ```python
-from mcp-student-sandbox.mystery_module import fn_x
-print(fn_x(1, -5, 6))  # Çıktı: (3.0, 2.0)
+from spaghetti_logic import process_data
+print(process_data([10, 20, 30]))
 ```
 
-## Katkıda Bulunma
+### 2. Ortalama oran hesaplama
 
-1. Fork edin.
-2. Branch oluşturun: `git checkout -b feature/yeni-ozellik`.
-3. Commit edin: `git commit -m "Yeni özellik eklendi"`.
-4. Push edin ve Pull Request açın.
+```python
+from failing_calculator import average_ratios
+print(average_ratios([10, 5, 0]))
+```
 
-## Lisans
+### 3. Güvenli anahtar kontrolü
 
-Bu proje MIT Lisansı altında lisanslanmıştır. Daha fazla bilgi için [LICENSE](LICENSE) dosyasına bakın.
+```python
+from secret_leak import connect
+# terminalde:
+# set AWS_SECRET_KEY=your_secret_key
+connect()
+```
 
-## İletişim
+### 4. Kuadratik denklem kökleri
 
-Sorularınız için GitHub Issues kullanın veya [email@example.com](mailto:email@example.com) adresine yazın.
+```python
+from mystery_module import fn_x
+print(fn_x(1, -5, 6))  # (3.0, 2.0)
+```
+
+## Test Örnekleri
+
+- `failing_calculator.py` içinde `average_ratios` sıfıra bölüm kontrolünü gösterir.
+- `mystery_module.py` gerçek kökler için `d >= 0` kontrolü içerir.
+
+
